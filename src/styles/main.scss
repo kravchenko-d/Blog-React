@@ -1,0 +1,137 @@
+#colored {
+    background-color: red;
+}
+
+header {
+    display: flex;
+    > nav {
+        margin: 0 32px;
+        > span {
+            padding: 8px;
+            > .current {
+                color: yellowgreen;
+            }
+        }
+    }
+}
+
+main {
+    width: 98vw;
+    height: 100vh;
+    box-sizing: border-box;
+
+    display: flex;
+
+    > aside {
+        width: 20%;
+        height: 100%;
+        box-sizing: border-box;
+
+        > div.tag {
+            padding: 8px 12px;
+            cursor: pointer;
+            &.active {
+                color: gold;
+            }
+        }
+    }
+
+    > section {
+        width: 60%;
+        height: 100%;
+        box-sizing: border-box;
+
+        > header {
+            display: flex;
+            > svg {
+                cursor: pointer;
+            }
+            > form {
+                > textarea {
+
+                }
+                > div {
+                    cursor: pointer;
+                }
+                > #colored {
+                    background-color: red;
+                }
+                > button {
+                    background-color: red;
+                }
+            }
+        }
+
+        > form {
+            > div {
+                > input {
+                    &:not(:last-child) {
+                        margin-right: 4px;
+                    }
+                }
+            }
+        }
+
+        > .topics-list {
+            width: 100%;
+            box-sizing: border-box;
+
+            > .topic {
+                background-color: rgb(180, 242, 243);
+                padding: 16px;
+                margin: 16px;
+                border-radius: 8px;
+                border: 4px solid rgba(4, 0, 0, 0.582);
+                box-shadow: 5px 5px 2px rgb(111, 215, 171);
+
+                &:not(:last-child) {
+                    margin-bottom: 16px;
+                }
+
+                > header {
+                    margin: 16px;
+                    display: flex;
+                    align-items: center;
+
+                    > svg {
+                        font-size: 24px;
+                    }
+
+                    > span {
+                        margin-left: 8px;
+                        font-weight: 1000;
+                        font-size: 24px;
+                    }
+                }
+
+                > article {
+                    padding: 8px 16px;
+                    font-size: 1.1rem; //16px * 1.1
+                    text-align: justify;
+                }
+
+                > footer {
+                    margin: 8px;
+                    display: flex;
+                    justify-content: end;
+
+                    > svg {
+                        font-size: 20px;
+                        &:first-child {
+                            cursor: pointer;
+                            margin-right: auto;
+                        }
+                        &:nth-child(2) {
+                            margin-right: 8px;
+                            cursor: pointer;
+                        }
+                        &:last-child {
+                            margin-left: 16px;
+                            cursor: pointer;
+                        }
+                    }                    
+                }
+            }
+        }
+    }
+}
