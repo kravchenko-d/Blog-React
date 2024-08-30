@@ -21,7 +21,7 @@ const NewTopic: FC<Props> = ({sendTopic, tags}) => {
     }
        
     const [addText, setAddText] = useState(false)
-    return <form>
+    return <form name="new_topic">
             {tags.map((el, id) => <div onClick={() => setTag(el)}
                                         key={`tag_${id}`}
                                         id={el === tag ? 'colored' : ''}>{el}</div>)}

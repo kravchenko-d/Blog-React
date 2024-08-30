@@ -47,7 +47,8 @@ const Main = () => {
 
     useEffect(() => {
         // if(tag){
-            setFilteredTopics(topics.filter((topic: any) => activeTags.length === 0 || activeTags.includes(topic.tag)))
+            // setFilteredTopics(topics.filter((topic: any) => activeTags.length === 0 || activeTags.includes(topic.tag))) // предыдущее решение
+            setFilteredTopics(topics.slice().reverse().filter((topic: any) => activeTags.length === 0 || activeTags.includes(topic.tag)))
             // setFilteredTopics(topics.filter(topic => !tag || tag.includes(topic.tag)))
         // }
         // else {
@@ -136,8 +137,8 @@ const Main = () => {
         <aside>
 
             {/* <Outlet context={[topics, setTopics, addTopic]}/> */}
-            {tags.map((item) => 
-            <div onClick={() => changeActiveTags(item)} // [...tags] = [tag1, tag2, tag3....]
+            {tags.map((item: string, id: number) => 
+            <div key={id} onClick={() => changeActiveTags(item)} // [...tags] = [tag1, tag2, tag3....]
                 className={'tag' + (activeTags.includes(item) ? ' active' : '')}>
                     #{item}
                 </div>)

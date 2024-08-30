@@ -26,6 +26,8 @@ const Topic: FC<Props> = ({id, pinned, isPinned = false, text, tag, uniqueId, au
 
     const [topicChange, setTopicChange] = useState(false)
 
+    const [topicText, setTopicText] = useState(text)
+
     
     const handleOnChangeText = () => {
         const text = textRef.current.value
@@ -42,7 +44,7 @@ const Topic: FC<Props> = ({id, pinned, isPinned = false, text, tag, uniqueId, au
         <span style={{fontWeight: 'bold'}}>{author === 1 ? newName : 'Some user name'} ({uniqueId}) (#{tag})</span>
         {changed && <span style={{marginLeft: 'auto', color: 'green'}}>Изменено</span>}
         </header>
-        {topicChange ?  <div><textarea ref={textRef}>{text}</textarea><button type='button' onClick={handleOnChangeText}>Сохранить</button></div> : <article>{text}</article>}
+        {topicChange ?  <div><textarea ref={textRef} value={topicText} onChange={e => setTopicText(e.target.value)}></textarea><button type='button' onClick={handleOnChangeText}>Сохранить</button></div> : <article>{text}</article>}
         <footer>
         <FontAwesomeIcon icon={faThumbtack}
                         color={isPinned ? "gold" : ""}

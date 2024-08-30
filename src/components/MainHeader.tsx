@@ -44,11 +44,11 @@ const MainHeader = () => {
 
     return <header style={{background: 'grey', marginBottom: '16px', padding: '8px'}}>
         {
-            pages.map(page => page === pathname ?
-                <span style={{color: 'black', marginRight: '8px'}}>
+            pages.map((page, id) => page === pathname ?
+                <span key={id} style={{color: 'black', marginRight: '8px'}}>
                     {generatePageName(page)}
                     </span> :
-                <Link style={{marginRight: '8px'}} to={page}>
+                <Link key={id} style={{marginRight: '8px'}} to={page}>
                     {generatePageName(page)}
                     </Link>)
         }

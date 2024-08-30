@@ -74,14 +74,16 @@ const changeText = (text: string, topicId: string) => {
 const addTopic = (text: string, tag: string) => {
     const res: Topic [] = [...topics]
     const newTopic: Topic = {
-        id: `topic_${res.length+1}`,
+        // id: `topic_${res.length+1}`,
+        id: `topic_${Number(res[res.length-1].id.slice(6))+1}`,
         text: text,
         tag: tag,
         author: 1,
         changed: false
     }
 
-    res.unshift(newTopic)
+    // res.unshift(newTopic)
+    res.push(newTopic)
 
     setTopics(res)
     console.log(res)

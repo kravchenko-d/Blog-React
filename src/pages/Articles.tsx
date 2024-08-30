@@ -65,7 +65,7 @@ const Articles = () => {
                 <br/>
                 <textarea ref={ref} style={{width: '50%', height: '100px', margin: '4px'}} ></textarea>
                 <br/>
-                <span onClick={() => handleOnAddArticle()} style={{margin: '16px 0', cursor: 'pointer', backgroundColor: 'lightgray', padding: '4px', borderRadius: '4px', margin: '4px'}}>добавить</span>
+                <span onClick={() => handleOnAddArticle()} style={{margin: '16px 0', cursor: 'pointer', backgroundColor: 'lightgray', padding: '4px', borderRadius: '4px'}}>добавить</span>
             </section>
 
             <section style={{ height: 'initial', width: '100%', marginTop: '16px' }}>
