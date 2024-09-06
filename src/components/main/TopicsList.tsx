@@ -7,13 +7,13 @@ type Props = {
   topicActiveIds?: string[];
 };
 
-const TopicsList: FC<Props> = ({ topics, pinned, topicActiveIds = [] }) => {
+const TopicsList: FC<Props> = ({ topics, pinned }) => {
   return (
     <div className="topics-list">
       {topics.map((topic) => (
         <Topic
           key={topic.id}
-          isPinned={topicActiveIds.includes(topic.id)}
+          isPinned={topic.isPinned}
           uniqueId={topic.id}
           tag={topic.tag}
           text={topic.text}

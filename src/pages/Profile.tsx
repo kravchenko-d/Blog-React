@@ -4,6 +4,7 @@ import { useContext, useEffect, useRef, useState } from 'react';
 import '../styles/main.scss';
 import TopicsList from '../components/main/TopicsList';
 import { AppContext, TopicContext, Topic } from '../App';
+import PinnedTopics from '../components/PinnedTopics';
 
 const Profile = () => {
   const navigate = useNavigate();
@@ -29,7 +30,7 @@ const Profile = () => {
 
   const { user, setUser } = useContext(AppContext);
 
-  const { topics, tags, addTopic, newName } = useContext(TopicContext);
+  const { topics, tags, addTopic, newName, pinned, topicActiveIds } = useContext(TopicContext);
 
   const [filteredTopics, setFilteredTopics] = useState<Topic[]>([]);
 
@@ -75,7 +76,11 @@ const Profile = () => {
           </button>
         </div>
       </section>
-      <aside></aside>
+      <PinnedTopics
+        filteredTopics={filteredTopics}
+        pinned={pinned}
+        topicActiveIds={topicActiveIds}
+      />
     </main>
   );
 };

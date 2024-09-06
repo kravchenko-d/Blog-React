@@ -21,8 +21,8 @@ type Props = {
 };
 
 const Topic: FC<Props> = ({
-  pinned,
-  isPinned = false,
+  // pinned,
+  isPinned,
   text,
   tag,
   uniqueId,
@@ -32,7 +32,7 @@ const Topic: FC<Props> = ({
 }) => {
   const textRef = useRef<any>(null);
 
-  const { newName, changeText, deleteTopic, handleLike } = useContext(TopicContext);
+  const { newName, changeText, deleteTopic, handleLike, pinned } = useContext(TopicContext);
 
   const [topicChange, setTopicChange] = useState(false); // раскрывает форму редактирования топика
   const [topicText, setTopicText] = useState(text);

@@ -11,6 +11,7 @@ export type Topic = {
   author: number;
   changed: any;
   isLiked: boolean;
+  isPinned: boolean;
 };
 
 export type TopicContext = {
@@ -24,6 +25,7 @@ export type TopicContext = {
   tagDefault: string;
   setTagDefault: (tag: string) => void;
   changeText: (text: string) => void;
+  pinned: (id: string) => void;
 };
 
 function App({ children }: PropsWithChildren) {
@@ -57,6 +59,7 @@ function App({ children }: PropsWithChildren) {
         author: Math.round(Math.random() * 10) % 2 ? -1 : 1,
         changed: false,
         isLiked: false,
+        isPinned: false
       }));
     setTopics(topics);
     setTagDefault(tags[0]);
@@ -83,6 +86,7 @@ function App({ children }: PropsWithChildren) {
       author: 1,
       changed: false,
       isLiked: false,
+      isPinned: false,
     };
 
     res.push(newTopic);
@@ -148,6 +152,16 @@ function App({ children }: PropsWithChildren) {
     setNewName(nName);
   };
 
+  const pinned = (id: string) =>  {
+    const topicsList = [...topics.map((topic) => ({ ...topic }))];
+    const indexTopic = topicsList.findIndex((topic) => topic.id === id);
+
+    if (~id) {
+      topicsList[indexTopic].isPinned = !topicsList[indexTopic].isPinned;
+    }
+    setTopics(topicsList);
+  }
+
   return (
     <AppContext.Provider value={{ user, setUser, changeUserField }}>
       <TopicContext.Provider
@@ -166,6 +180,7 @@ function App({ children }: PropsWithChildren) {
           setTopicChange,
           deleteTopic,
           handleLike,
+          pinned,
         }}>
         {children}
       </TopicContext.Provider>

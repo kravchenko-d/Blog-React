@@ -2,13 +2,13 @@ import { useEffect, useState, useContext } from 'react';
 import Header from '../components/main/Header';
 import TopicsList from '../components/main/TopicsList';
 import '../styles/main.scss';
-import Topic from '../components/main/Topic';
 import { TopicContext, Topic as TTopic } from '../App';
+import PinnedTopics from '../components/PinnedTopics';
 
 const Main = () => {
-  const { topics, tags, addTopic, newName } = useContext(TopicContext);
+  const { topics, tags, addTopic, newName, pinned, topicActiveIds } = useContext(TopicContext);
 
-  const [topicActiveIds, setTopicActiveIds] = useState<string[]>([]);
+ 
   const [activeTags, setActiveTags] = useState<string[]>([]);
   const [filteredTopics, setFilteredTopics] = useState<TTopic[]>([]);
 
@@ -24,20 +24,6 @@ const Main = () => {
         .filter((topic: any) => activeTags.length === 0 || activeTags.includes(topic.tag)),
     ); // выводит топики в обратном порядке
   }, [activeTags, topics, newName]);
-
-  const pinned = (id: string) => {
-    const ids = [...topicActiveIds];
-
-    const index = ids.indexOf(id);
-    if (~index) {
-      ids.splice(index, 1);
-    } else {
-      ids.push(id);
-    }
-
-    setTopicActiveIds(ids);
-    // прикреплять и откреплять => setTopicActiveId
-  };
 
   const changeActiveTags = (item: string) => {
     const items = [...activeTags];
@@ -79,22 +65,11 @@ const Main = () => {
           <Header sendTopic={addTopic} tags={tags} />
           <TopicsList topics={filteredTopics} pinned={pinned} topicActiveIds={topicActiveIds} />
         </section>
-        <aside>
-          {filteredTopics
-            .filter((topic) => topicActiveIds.includes(topic.id))
-            .map((topic) => (
-              <Topic
-                key={topic.id}
-                text={topic.text}
-                tag={topic.tag}
-                uniqueId={topic.id}
-                pinned={pinned}
-                author={topic.author}
-                isPinned={true}
-                isLiked={topic.isLiked}
-              />
-            ))}
-        </aside>
+        <PinnedTopics
+          filteredTopics={filteredTopics}
+          pinned={pinned}
+          topicActiveIds={topicActiveIds}
+        />
       </main>
     </>
   );
