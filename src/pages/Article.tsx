@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { addComment, replyComment } from "../store/slices/article"
+import { addComment } from "../store/slices/article"
 import { useNavigate, useParams } from "react-router-dom"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faCheck, faReply } from "@fortawesome/free-solid-svg-icons"
+import { faReply } from "@fortawesome/free-solid-svg-icons"
 import { Comment } from "../store/slices/article"
 
 const Article = () => {
@@ -59,14 +59,14 @@ const Article = () => {
         return comments?.map((comment: (Comment & {children?: Comment[]})) =>
         <div key={`comment_${comment.id}`} style={{marginBottom: '4px', border: '1px solid rgba(0,0,0,0.1)', borderRadius: '4px'}}>
             {comment.text}<br/>
-            <label>
-                {comment.id === commentAnswerId && <><textarea ref={refAnswer}></textarea><br/></>}
+            <form>
+                {comment.id === commentAnswerId && <><textarea ref={refAnswer} name="reply_comment" ></textarea><br/></>}
                     <div style={{cursor: 'pointer'}} onClick={() => handleOnAddAnswer(comment.id)}>
                     <FontAwesomeIcon icon={faReply} 
                     style={{marginLeft: '4px', color: 'blue'}}/><span style={{marginLeft: '4px'}}>Reply</span>
                     </div>
 
-            </label>
+            </form>
             <br/>
             {/*@ts-ignore*/}
             {comment.children?.length > 0 && <div style={{marginLeft: '8px'}}>{renderComments(comment.children)}</div>}
@@ -113,7 +113,7 @@ const Article = () => {
                     <hr/>
                     <section style={{marginTop: '32px'}}>
                         <label>
-                        <textarea style={{width: '98%', borderRadius: '4px'}} ref={refComment}></textarea><br/>
+                        <textarea style={{width: '98%', borderRadius: '4px'}} ref={refComment} name="comment_text" ></textarea><br/>
                         <button onClick={() => handleOnAddComment()}>Add comment</button>
                         </label>
                         <div style={{padding: '4px', marginTop: '8px'}}>
