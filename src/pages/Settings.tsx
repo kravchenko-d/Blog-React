@@ -43,7 +43,8 @@ const Settings = () => {
         <section>
         <h1>Settings</h1>
             <div>
-                {tags.map((tag, id) => <div key={`tag_${id}`}>
+                <div style={{border: '1px solid rgba(0,0,0,0.1)', padding: '8px', borderRadius: '8px', backgroundColor: 'rgba(0,0,0,.05)', margin: '8px 0'}}>
+                    {tags.map((tag: string, id: number) => <div key={`tag_${id}`}>
                     <input  type='radio'
                             name='default'
                             value={tag}
@@ -55,17 +56,22 @@ const Settings = () => {
                     <span onClick={() => deleteTag(tag)}><FontAwesomeIcon icon={faXmark}/></span>
                 }
                 </div>)}
-                <span>New tag </span>    
-                <input value={text} onChange={handleOnChange}></input>
-                <button style={{backgroundColor: 'lightgray', margin: '4px'}} onClick={handleOnSubmit} type={'button'}>Add tag</button>
-                <br/>
-                <label>
-                    <span>User name </span>
-                    <input ref={ref}/>
-                </label>
-                <button style={{backgroundColor: 'lightgray', margin: '4px'}} onClick={handleOnChangeName}>Change name</button>
+                <form>
+                    <span>New tag </span>    
+                    <input value={text} onChange={handleOnChange}></input>
+                    <button style={{margin: '4px'}} onClick={handleOnSubmit} type={'button'}>Add tag</button>
+                </form>
+                </div>                
+                <form style={{border: '1px solid rgba(0,0,0,0.1)', padding: '8px', borderRadius: '8px', backgroundColor: 'rgba(0,0,0,.05)', margin: '8px 0'}}>
+                    <label>
+                        <span>User name </span>
+                        <input ref={ref}/>
+                    </label>
+                    <button style={{margin: '4px'}} onClick={handleOnChangeName}>Change name</button>
+                </form>
+
                 <div>
-                <button style={{backgroundColor: 'lightgray', margin: '16px', cursor: 'pointer'}}
+                <button style={{margin: '16px', cursor: 'pointer'}}
                 onClick={() => navigate(-1)}>Back</button>
                 </div>
             </div>

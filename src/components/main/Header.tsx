@@ -1,7 +1,6 @@
 import { faPenToSquare } from "@fortawesome/free-regular-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { ChangeEvent, FC, useState } from "react"
-// import { tagsData } from "../../pages/Main"
+import { FC, useState } from "react"
 import NewTopic from "./NewTopic"
 
 type Props = {
@@ -22,24 +21,14 @@ const Header: FC<Props> = ({sendTopic, tags}) => {
         setAddText(false)
     }
 
-
-    // const [tagColor, setTagColor] = useState(false)
-    // const selectTags = () => {
-    //     setTag(tag)
-    //     setTagColor(!tagColor)
-    // }
-
-    const handleOnChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
-        setText(event.target.value)
-    }
-
-    return <header>
-        <FontAwesomeIcon style={{fontSize: '24px'}} icon={faPenToSquare}
-        onClick={() => setAddText(!addText) }
-         />
-         { addText && <NewTopic tags={tags} sendTopic={handleOnSumbit}/> }
-
-        <span></span>
+    return <header style={{display: 'flex', flexDirection: 'column', cursor: 'pointer'}}>
+        <div onClick={() => setAddText(!addText)}>
+            <span style={{marginRight: '12px', fontWeight: 'bold'}}>Add topic</span>
+            <FontAwesomeIcon style={{fontSize: '24px'}} icon={faPenToSquare}
+            />
+        </div>
+        
+         { addText && <NewTopic tags={tags} sendTopic={handleOnSumbit}/> }        
     </header>
 }
 

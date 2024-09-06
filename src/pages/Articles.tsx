@@ -60,18 +60,19 @@ const Articles = () => {
         <section>
             <h1>Articles</h1>
 
-            <section style={{height: 'initial', width: '100%'}}>
+            <section style={{height: 'initial', width: '97%', border: '1px solid rgba(0,0,0,0.1)', padding: '8px', borderRadius: '8px', backgroundColor: 'rgba(0,0,0,.05)', margin: '8px 0'}}>
+                <span>Title</span>
                 <input style={{margin: '4px'}} ref={newTitleRef}></input>
                 <br/>
-                <textarea ref={ref} style={{width: '50%', height: '100px', margin: '4px'}} ></textarea>
+                <textarea ref={ref} style={{width: '95%', height: '100px', margin: '4px'}} ></textarea>
                 <br/>
-                <span onClick={() => handleOnAddArticle()} style={{margin: '16px 0', cursor: 'pointer', backgroundColor: 'lightgray', padding: '4px', borderRadius: '4px'}}>добавить</span>
+                <button onClick={() => handleOnAddArticle()}>Add</button>
             </section>
 
             <section style={{ height: 'initial', width: '100%', marginTop: '16px' }}>
                 {
                     articles.map((article: any) =>
-                        <article key={`article_${article.id}`} style={{backgroundColor: 'lightgrey', borderRadius: '8px', margin: '4px', padding: '4px'}}>
+                        <article key={`article_${article.id}`} className="topic">
                             {
                                 changeArticleId === article.id ?
                                     <>
@@ -79,7 +80,7 @@ const Articles = () => {
                                     <textarea ref={refChange}  style={{width: '80%', height: '150px'}} defaultValue={article.text}></textarea>
                                     </>:
                                     <>
-                                    <div style={{fontWeight: 'bold'}}>{article.title}</div>
+                                    <div style={{fontWeight: 'bold', cursor: 'pointer'}} onClick={() => navigate(`/articles/${article.id}`)}>{article.title}</div>
                                     <div>{article.text}</div>
                                     </>
                             }
@@ -97,7 +98,7 @@ const Articles = () => {
                 }
             </section>
             <div>
-                <button style={{backgroundColor: 'lightgray', margin: '16px', cursor: 'pointer'}}
+                <button style={{margin: '16px', cursor: 'pointer'}}
                 onClick={() => navigate(-1)}>Back</button>
                 </div>
         </section>

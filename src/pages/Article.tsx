@@ -14,8 +14,6 @@ const Article = () => {
     const [article, setArticle] = useState<any>({})
     const [commentAnswerId, setCommentAnswerId] = useState(-1)
     
-    // const [changeCommentId, setChangeCommentId] = useState(-1)
-
     const articles = useSelector(({articles}) => articles.articles) // state => any
     const comments: (Comment & {children?: Comment[]})[] = useSelector(({articles}) => articles.comments)
 
@@ -59,12 +57,15 @@ const Article = () => {
 
     const renderComments = (comments: (Comment & {children?: Comment[]})[]) => {
         return comments?.map((comment: (Comment & {children?: Comment[]})) =>
-        <div key={`comment_${comment.id}`} style={{marginBottom: '8px'}}>
+        <div key={`comment_${comment.id}`} style={{marginBottom: '4px', border: '1px solid rgba(0,0,0,0.1)', borderRadius: '4px'}}>
             {comment.text}<br/>
             <label>
                 {comment.id === commentAnswerId && <><textarea ref={refAnswer}></textarea><br/></>}
-                    <FontAwesomeIcon icon={faReply} onClick={() => handleOnAddAnswer(comment.id)}
-                    style={{marginLeft: '4px', color: 'blue'}}/>
+                    <div style={{cursor: 'pointer'}} onClick={() => handleOnAddAnswer(comment.id)}>
+                    <FontAwesomeIcon icon={faReply} 
+                    style={{marginLeft: '4px', color: 'blue'}}/><span style={{marginLeft: '4px'}}>Reply</span>
+                    </div>
+
             </label>
             <br/>
             {/*@ts-ignore*/}
@@ -72,20 +73,6 @@ const Article = () => {
         </div>
         )
     }
-
-    // const handleOnAddComment = () => {
-    //     // @ts-ignore        
-    //     const comment = ref?.current?.value
-
-    //     if(comment && articleId){
-    //         dispatch(addComment({
-    //                 id: +articleId,
-    //                 comment: comment
-    //         }))
-    //         // @ts-ignore
-    //         ref.current.value = ''
-    //     }
-    // }
 
     const handleOnAddComment = () => {               
         const text = refComment.current?.value
@@ -98,21 +85,6 @@ const Article = () => {
             refComment.current.value = ''
         }
     }
-
-    // const handleOnReplyComment = () => {
-    //     // @ts-ignore        
-    //     const comment = refComment?.current?.value
-
-    //     if(comment && articleId){
-    //         dispatch(replyComment({
-    //                 id: +articleId,
-    //                 comment: comment
-    //         }))
-    //         // @ts-ignore
-    //         refComment.current.value = ''
-    //         setChangeCommentId(-1)
-    //     }
-    // }
 
     const handleOnAddAnswer = (id: number) => {
         if(~commentAnswerId){
@@ -133,65 +105,28 @@ const Article = () => {
         }
     }
 
-    return <main style={{display: 'flex', flexDirection: 'column'}}>
-        <span style={{cursor: 'pointer'}} onClick={() => navigate(-1)}>back</span>
-        <h1>{article.title} - {article?.id}</h1>
-        <article>{articleId && articles[+articleId-1].text}</article>
-        {/* <article style={{margin: '8px'}} >{article?.text}</article>
-        <section style={{height: 'initial', width: '100%'}}>
-            <textarea ref={ref} style={{width: '25%', height: '100px'}} ></textarea>
-            <br/>
-            <span onClick={() => handleOnAddComment()} style={{margin: '16px 0', backgroundColor: 'lightgrey', borderRadius: '4px', padding: '4px', cursor: 'pointer'}}>Комментировать</span>
-        </section> */}
-
-        <section style={{marginTop: '32px'}}>
-            <label>
-            <textarea ref={refComment}></textarea><br/>
-            <span onClick={() => handleOnAddComment()}>add comment</span>
-            </label>
-            <div style={{marginTop: '8px'}}>
-                {renderComments(article.comments ?? [])}
-                {/* {article.comments?.map((comment: (Comment & {children?: Comment[]})) =>
-                    <div key={`comment_${comment.id}`} style={{marginBottom: '8px'}}>
-                        {comment.text}<br/>
+    return  <main>
+                <aside></aside>
+                <section className="block">
+                    <h1>{article.title}</h1>
+                    <article>{articleId && articles[+articleId-1].text}</article>
+                    <hr/>
+                    <section style={{marginTop: '32px'}}>
                         <label>
-                            {comment.id === commentAnswerId && <><textarea ref={refAnswer}></textarea></>}
-                                <FontAwesomeIcon icon={faReply} onClick={() => handleOnAddAnswer(comment.id)}
-                                style={{marginLeft: '4px', color: 'blue'}}/>
+                        <textarea style={{width: '98%', borderRadius: '4px'}} ref={refComment}></textarea><br/>
+                        <button onClick={() => handleOnAddComment()}>Add comment</button>
                         </label>
-                        <br/>
-                        <div>
-                            {comment.children?.map(item => <div>{Object.values(item).join(' - ')}</div>)}
+                        <div style={{padding: '4px', marginTop: '8px'}}>
+                            {renderComments(article.comments ?? [])}
                         </div>
-                    </div>
-                )} */}
-            </div>
-        </section>
-
-        {/* <section style={{ height: 'initial', width: '100%', marginTop: '16px' }}>
-            {article.comments?.map((comment: string, id: number) =>
-                <div>
-                    {
-                        changeCommentId === id ?
-                            <>
-                            <div>{comment}</div>
-                            <textarea ref={refComment}  style={{width: '50%', height: '50px'}}></textarea>
-                            </>:
-                            <>
-                            <div>{comment}</div>
-                            </>
-                    }
-                    <footer style={{marginTop: '8px'}}>
-                        {
-                            changeCommentId === id ?
-                            <FontAwesomeIcon icon={faCheck} color='green' onClick={() => handleOnReplyComment()}/> :
-                            <FontAwesomeIcon icon={faReply} onClick={() => setChangeCommentId(id)}/>
-                        }
-                    </footer>
-                </div>            
-            )}
-        </section> */}
-    </main>
+                        <div>
+                            <button style={{margin: '16px', cursor: 'pointer'}}
+                            onClick={() => navigate(-1)}>Back</button>
+                        </div>
+                    </section>
+                </section>
+                <aside></aside>
+            </main>
 }
 
 export default Article

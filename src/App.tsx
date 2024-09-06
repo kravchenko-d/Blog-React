@@ -62,7 +62,7 @@ function App({children}: PropsWithChildren) {
 const changeText = (text: string, topicId: string) => {
   const topicsList = [...topics.map(topic => ({...topic}))]
   const indexTopic = topicsList.findIndex(topic => topic.id === topicId)
-  debugger
+  // debugger
   if(~indexTopic && topicsList[indexTopic].text !== text){
     topicsList[indexTopic].text = text
     topicsList[indexTopic].changed = true

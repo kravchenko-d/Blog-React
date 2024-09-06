@@ -81,21 +81,6 @@ const Main = () => {
         // прикреплять и откреплять => setTopicActiveId
     }
 
-
-    // const [topicsActive, setTopicsActive] = useState<Topic[]>([]) // альтернативный
-    // const pinned = (topic: Topic) => {
-    //     const items = [...topicsActive]
-    //     const index = items.findIndex(item => item.id === topic.id)
-    //     if(~index){
-    //         items.splice(index, 1)
-    //     }
-    //     else{
-    //         items.push(topic)
-    //     }
-
-    //     setTopicsActive(items)
-    // }
-
     const isPinned = {}
 
     const changeActiveTags = (item: string) => {
@@ -112,44 +97,19 @@ const Main = () => {
         setActiveTags(items)
     }
 
-    // const addTopic = (text: string, tag: string) => {
-    //     console.log('addTopic')
-    //     const res = [...topics]
-    //     const newTopic: Topic = {
-    //         id: `${res.length+1}`,
-    //         text: text,
-    //         tag: tag
-    //     }
-
-    //     res.unshift(newTopic)
-
-    //     setTopics(res)
-    // }
-
-    // const [topics, setTopics, addTopic] = useOutletContext<any>()
-
     return <>
-        {/* <MainHeader/> */}
         <main>
-            {/* <Link to='/one'>one</Link>
-            <Link to='/two'>two</Link>
-            <Link to='/three'>three</Link> */}
         <aside>
-
-            {/* <Outlet context={[topics, setTopics, addTopic]}/> */}
-            {tags.map((item: string, id: number) => 
-            <div key={id} onClick={() => changeActiveTags(item)} // [...tags] = [tag1, tag2, tag3....]
+            <h3 style={{marginLeft: '8px'}}>Choose tag</h3>
+            {tags.map((item: string, id: number) =>
+                <div key={id} onClick={() => changeActiveTags(item)} // [...tags] = [tag1, tag2, tag3....]
                 className={'tag' + (activeTags.includes(item) ? ' active' : '')}>
                     #{item}
-                </div>)
-                }
-                {/* <br/>
-                <br/>
-                <Link to={'/settings'}>Settings</Link>
-                <br/>
-                <Link to={'/profile'}>Profile</Link> */}
+                </div>
+            )}
         </aside>
         <section>
+            <h1>Blog{activeTags.length > 0 && activeTags.map((tag: string) => <span style={{margin: '0 8px'}}>#{tag}</span>)}</h1>
            <Header sendTopic={addTopic} tags={tags}/>
            <TopicsList topics={filteredTopics} pinned={pinned} topicActiveIds={topicActiveIds}/> 
         </section>
@@ -164,20 +124,6 @@ const Main = () => {
                                                 author={topic.author}
                                                 isPinned={true}/>)
             }
-            {/* { // альтернативный
-                topicsActive.map(topic =>
-                    <Topic  key={topic.id}
-                            text={topic.text}
-                            tag={topic.tag}
-                            uniqueId={topic.id}
-                            pinned={pinned}
-                            isPinned={true}/>)
-            } */}
-            {/* {topicActiveId !== -1 && <Topic text={topics[topicActiveIds].text}
-                                            tag={topics[topicActiveIds].tag}
-                                            id={topicActiveIds}
-                                            pinned={pinned}
-                                            isPinned={true}/>} */}
         </aside>
     </main>
     </>

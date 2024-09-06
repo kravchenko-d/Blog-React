@@ -2,12 +2,12 @@ import { FC, useEffect, useState } from "react"
 import { Outlet } from "react-router-dom"
 
 
-// export type Topic = {
-//     id: string,
-//     text: string,
-//     tag: string,
-//     author: number
-// }
+export type Topic = {
+    id: string,
+    text: string,
+    tag: string,
+    author: number
+}
 
 // export type OutletContext = {
 //     topics: Topic[],

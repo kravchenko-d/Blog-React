@@ -1,10 +1,8 @@
 import { faHeart as faHeartRegular, faPenToSquare } from "@fortawesome/free-regular-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faShare, faUser, faHeart as faHeartSolid, faThumbtack, faCross, faXmark } from "@fortawesome/free-solid-svg-icons"
+import { faUser, faHeart as faHeartSolid, faThumbtack, faXmark } from "@fortawesome/free-solid-svg-icons"
 import { FC, useState, useContext, useRef } from "react"
-// import { useOutletContext } from "react-router-dom"
-// import { OutletContext } from "../../pages/MainWrapper"
-import { AppContext, TopicContext } from "../../App"
+import { TopicContext } from "../../App"
 
 type Props = {
     pinned?: (id: string) => void
@@ -16,7 +14,7 @@ type Props = {
     changed?: boolean
 }
 
-const Topic: FC<Props> = ({id, pinned, isPinned = false, text, tag, uniqueId, author, changed}) => {
+const Topic: FC<Props> = ({pinned, isPinned = false, text, tag, uniqueId, author, changed}) => {
 
     const textRef = useRef<any>(null)
 
@@ -37,24 +35,27 @@ const Topic: FC<Props> = ({id, pinned, isPinned = false, text, tag, uniqueId, au
         setTopicChange(false)
     }
 
-    return <div style={{margin: '20px 8px', padding: '8px', backgroundColor: 'lightgray', borderRadius: '8px'}}
+    return <div style={{margin: '20px 8px'}}
         className='topic'>
         <header>
         <FontAwesomeIcon style={{margin: '2px'}} icon={faUser} />
         <span style={{fontWeight: 'bold'}}>{author === 1 ? newName : 'Some user name'} ({uniqueId}) (#{tag})</span>
         {changed && <span style={{marginLeft: 'auto', color: 'green'}}>Изменено</span>}
         </header>
-        {topicChange ?  <div><textarea ref={textRef} value={topicText} onChange={e => setTopicText(e.target.value)}></textarea><button type='button' onClick={handleOnChangeText}>Сохранить</button></div> : <article>{text}</article>}
+        {topicChange ?  <div>
+            <textarea ref={textRef} value={topicText} onChange={e => setTopicText(e.target.value)}></textarea>
+        <button type='button' onClick={handleOnChangeText} style={{backgroundColor: 'gray', color: 'white'}}>Сохранить</button>
+        </div> : <article>
+                    {text}
+                </article>}
         <footer>
         <FontAwesomeIcon icon={faThumbtack}
                         color={isPinned ? "gold" : ""}
                         onClick={() => pinned && pinned(uniqueId)}
-                        // onClick={pinned}
                         />
         <FontAwesomeIcon icon={isLiked ? faHeartSolid : faHeartRegular}
         color={isLiked ? "red" : ""}
         onClick={() => setIsLiked(!isLiked)} />
-        <FontAwesomeIcon icon={faShare} />
         {author === 1 && <FontAwesomeIcon icon={faPenToSquare} color='green' cursor='pointer' style={{marginLeft: '16px'}} onClick={() => setTopicChange(!topicChange)}/>}
         {author === 1 && <FontAwesomeIcon icon={faXmark} color='red' onClick={() => deleteTopic(uniqueId)}/>}
         </footer>

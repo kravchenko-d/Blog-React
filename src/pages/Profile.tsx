@@ -1,8 +1,6 @@
 import { Outlet, useNavigate, useOutletContext } from "react-router-dom"
-import MainHeader from '../components/MainHeader'
 import Header from "../components/main/Header"
 import { Topic } from "./Main"
-import { OutletContext } from "./MainWrapper"
 import { ChangeEvent, useContext, useEffect, useRef, useState } from "react"
 import '../styles/main.scss'
 import TopicsList from "../components/main/TopicsList"
@@ -29,7 +27,7 @@ const Profile = () => {
       }
 
       const changeUserFields = (fields: any) => {
-        debugger
+        // debugger
         setUser({...user, ...fields})
       }
 
@@ -67,23 +65,21 @@ const Profile = () => {
       <aside></aside>
       <section>
         <h1>Profile</h1>
-          {/* <MainHeader/> */}
-          {/* <Header sendTopic={sendTopic}/> */}
           <Header tags={tags} sendTopic={addTopic}/>
-          <form onSubmit={onSubmit}>
-              <div>
+          <form onSubmit={onSubmit} style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between', border: '1px solid rgba(0,0,0,0.1)', padding: '8px', borderRadius: '8px', backgroundColor: 'rgba(0,0,0,.05)', margin: '8px 0'}}>
+              <div style={{margin: '8px 0'}}>
                 <input ref={nameRef} name='name' key='name' />
                 <input ref={surnameRef} name='surname' key='surname' />
                 <input ref={emailRef} name='email' key='email' />
               </div>
               <div>
-              <button style={{backgroundColor: 'lightgray', margin: '4px'}}>Изменить данные</button>
+              <button style={{margin: '4px'}}>Change data</button>
               </div>
           </form>
-          
+          <h2>My topics</h2>
           <TopicsList topics={filteredTopics}/>
           <div>
-          <button style={{backgroundColor: 'lightgray', margin: '16px', cursor: 'pointer'}}
+          <button style={{margin: '16px', cursor: 'pointer'}}
           onClick={() => navigate(-1)}>Back</button>
           </div>
       </section>

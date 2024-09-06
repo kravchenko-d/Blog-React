@@ -1,5 +1,3 @@
-import { faBars, faGear, faUser } from "@fortawesome/free-solid-svg-icons"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { useEffect } from "react"
 import { useContext} from "react"
 import { Link, useLocation } from "react-router-dom"
@@ -19,7 +17,7 @@ const MainHeader = () => {
 
     const {pathname} = useLocation()
 
-    const {user, setUser} = useContext(AppContext)
+    const {user} = useContext(AppContext)
 
     const generatePageName = (page: string) => {
         const res = page.split('')
@@ -34,27 +32,17 @@ const MainHeader = () => {
         return firstElement?.toLocaleUpperCase() + res.join('')
     }
 
-    const reverseUserValues = () => {
-        const newUser = {...user}
-        for(const key in newUser){
-            newUser[key] = newUser[key].split('').reverse().join('')
-        }
-        setUser(newUser)
-    }
-
-    return <header style={{background: 'grey', marginBottom: '16px', padding: '8px'}}>
+    return <header style={{background: '#22577A', marginBottom: '16px', padding: '8px'}}>
         {
             pages.map((page, id) => page === pathname ?
-                <span key={id} style={{color: 'black', marginRight: '8px'}}>
+                <span key={id} style={{color: 'white', marginRight: '8px'}}>
                     {generatePageName(page)}
                     </span> :
                 <Link key={id} style={{marginRight: '8px'}} to={page}>
                     {generatePageName(page)}
                     </Link>)
         }
-        <span style={{marginLeft: "16px"}}>{Object.values(user).join(' - ')}</span>
-        <span style={{marginLeft: "16px", cursor: 'pointer', backgroundColor: 'lightcoral', borderRadius: '4px', padding: ' 0 4px', fontWeight: "bold"}}
-        onClick={() => reverseUserValues()}>reverse user values</span>
+        <div style={{margin: "0 16px 0 auto", color: 'white'}}>{Object.values(user).join(' ')}</div>
     </header>
 }
 
