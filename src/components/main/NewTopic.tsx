@@ -21,17 +21,7 @@ const NewTopic: FC<Props> = ({ sendTopic, tags }) => {
 
   return (
     <form
-      name="new_topic"
-      style={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        border: '1px solid rgba(0,0,0,0.1)',
-        padding: '8px',
-        borderRadius: '8px',
-        backgroundColor: 'rgba(0,0,0,.05)',
-        margin: '8px 0',
-      }}>
+      name="new_topic">
       <div>
         {tags.map((el, id) => (
           <div onClick={() => setTag(el)} key={`tag_${id}`} id={el === tag ? 'colored' : ''}>

@@ -48,6 +48,15 @@ main {
         cursor: pointer;
       }
       > form {
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border: 1px solid rgba(0,0,0,0.1);
+        padding: 8px;
+        background-color: rgba(0,0,0,.05);
+        margin: 8px 0;
+
         > div {
           cursor: pointer;
         }

@@ -9,7 +9,7 @@ const Settings = () => {
     useContext(TopicContext);
 
   const ref = useRef<any>(null);
-  
+
   useEffect(() => {
     ref.current.value = newName;
   }, []);
@@ -70,23 +70,16 @@ const Settings = () => {
             ))}
             <form>
               <span>New tag </span>
-              <input value={text} onChange={handleOnChange} name="new_tag" ></input>
+              <input value={text} onChange={handleOnChange} name="new_tag"></input>
               <button style={{ margin: '4px' }} onClick={handleOnSubmit} type={'button'}>
                 Add tag
               </button>
             </form>
           </div>
-          <form
-            style={{
-              border: '1px solid rgba(0,0,0,0.1)',
-              padding: '8px',
-              borderRadius: '8px',
-              backgroundColor: 'rgba(0,0,0,.05)',
-              margin: '8px 0',
-            }}>
+          <form className="block">
             <label>
               <span>User name </span>
-              <input ref={ref} name='user_name' />
+              <input ref={ref} name="user_name" />
             </label>
             <button style={{ margin: '4px' }} onClick={handleOnChangeName} type={'button'}>
               Change name
