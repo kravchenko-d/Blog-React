@@ -8,7 +8,6 @@ import PinnedTopics from '../components/PinnedTopics';
 const Main = () => {
   const { topics, tags, addTopic, newName, pinned, topicActiveIds } = useContext(TopicContext);
 
- 
   const [activeTags, setActiveTags] = useState<string[]>([]);
   const [filteredTopics, setFilteredTopics] = useState<TTopic[]>([]);
 
@@ -68,7 +67,6 @@ const Main = () => {
         <PinnedTopics
           filteredTopics={filteredTopics}
           pinned={pinned}
-          topicActiveIds={topicActiveIds}
         />
       </main>
     </>

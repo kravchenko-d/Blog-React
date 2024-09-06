@@ -4,14 +4,13 @@ import Topic from './main/Topic';
 type Props = {
   filteredTopics: any[];
   pinned?: (id: string) => void;
-  topicActiveIds?: string[];
 };
 
 const PinnedTopics: FC<Props> = ({ filteredTopics, pinned }) => {
 
   return (
     <aside>
-        <h3 style={{marginLeft: '8px'}}>Pinned topics</h3>
+      {filteredTopics.filter(topic => topic.isPinned).length > 0 && <h3 style={{marginLeft: '8px'}}>Pinned topics</h3>}
       {filteredTopics
         .filter((topic) => topic.isPinned)
         .map((topic) => (

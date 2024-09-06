@@ -30,7 +30,7 @@ const Profile = () => {
 
   const { user, setUser } = useContext(AppContext);
 
-  const { topics, tags, addTopic, newName, pinned, topicActiveIds } = useContext(TopicContext);
+  const { topics, tags, addTopic, newName, pinned } = useContext(TopicContext);
 
   const [filteredTopics, setFilteredTopics] = useState<Topic[]>([]);
 
@@ -79,7 +79,6 @@ const Profile = () => {
       <PinnedTopics
         filteredTopics={filteredTopics}
         pinned={pinned}
-        topicActiveIds={topicActiveIds}
       />
     </main>
   );

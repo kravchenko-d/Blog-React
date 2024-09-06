@@ -4,7 +4,6 @@ type Article = {
   id: number;
   text: string;
   title: string;
-  comments: string[];
 };
 
 export type Comment = {
@@ -26,7 +25,6 @@ const initialState: InitState = {
       title: 'Title test',
       id: 1,
       text: 'Lorem',
-      comments: ['test comment', 'new comment'],
     },
   ],
   comments: [],
@@ -42,7 +40,6 @@ const articlesSlice = createSlice({
         title: title,
         id: (state.articles[state.articles.length - 1]?.id ?? 0) + 1,
         text: text,
-        comments: [],
       });
     },
     deleteArticle(state, action) {
@@ -59,13 +56,6 @@ const articlesSlice = createSlice({
         state.articles[index].title = title;
       }
     },
-    // addComment(state, action){
-    //     const {id, comment} = action.payload
-    //     const index = state.articles.findIndex(article => article.id === id)
-    //     if(~index){
-    //         state.articles[index].comments.push(comment)
-    //     }
-    // },
     addComment(state, action) {
       const { text, articleId, parentId } = action.payload;
       state.comments.push({
@@ -75,21 +65,9 @@ const articlesSlice = createSlice({
         parent: parentId,
       });
     },
-    replyComment(state, action) {
-      // не нужен для функционала с ответами на комментарии
-      const { id, comment } = action.payload;
-      const index = state.articles.findIndex((article) => article.id === id);
-      if (~index) {
-        state.articles[index].comments.splice(
-          state.articles[index].comments.indexOf(comment),
-          0,
-          comment,
-        );
-      }
-    },
   },
 });
 
-export const { addArticles, deleteArticle, changeArticle, addComment, replyComment } =
+export const { addArticles, deleteArticle, changeArticle, addComment } =
   articlesSlice.actions;
 export default articlesSlice.reducer;
